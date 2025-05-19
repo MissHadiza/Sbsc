@@ -2,6 +2,9 @@
 import vendorPos from "/pageObjects/vendor-pos.js"
 
 const vendorLogin = new vendorPos()
+const logindata = require('/cypress/fixtures/loginData.json');
+const vendorEmail = logindata.vendorLoginDetails.email;
+const vendorPassword = logindata.vendorLoginDetails.password;
 
 describe('Login Module', () => {
 
@@ -44,8 +47,8 @@ describe('Login Module', () => {
 
 
     it('Verifies that user can login with valid email and password', function(){
-        vendorLogin.Email().clear().type("olutan@yopmail.com")
-        vendorLogin.Password().clear().type("password1")
+        vendorLogin.Email().clear().type(vendorEmail)
+        vendorLogin.Password().clear().type(vendorPassword)
         vendorLogin.submitBtn().click()
         cy.wait(5000)
         cy.contains('Dashboard')
